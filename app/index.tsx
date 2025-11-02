@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
+import LinearGradient from 'react-native-linear-gradient';
 
 const styles = StyleSheet.create({
   container: {
@@ -10,7 +11,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#2E1D12"
+    backgroundColor: "#2E1D12",
+    width: '100%'
   },
   title: {
     fontSize: 20,
@@ -23,12 +25,12 @@ export default function Index() {
     <View
       style={styles.container}
     >
-      <View 
+      <LinearGradient colors = {['2E1D12', '562D15']}
         style={styles.header}>
           <Text style={styles.title}>
             ChessVision Home
           </Text>
-      </View>
+      </LinearGradient>
       <View 
         style={{
           flex: 8,
