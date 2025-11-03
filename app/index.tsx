@@ -11,12 +11,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#2E1D12",
     width: '100%'
   },
   title: {
     fontSize: 20,
     color: 'white',
+    fontFamily: 'Koh Santepheap-Regular',
   }
 })
 
@@ -25,7 +25,10 @@ export default function Index() {
     <View
       style={styles.container}
     >
-      <LinearGradient colors = {['2E1D12', '562D15']}
+      <LinearGradient 
+        colors = {['#2e1d12', '#562d15']}
+        start={{x: 0, y: 0}} 
+        end={{x: 1, y: 0}}
         style={styles.header}>
           <Text style={styles.title}>
             ChessVision Home
