@@ -79,9 +79,9 @@ const styles = StyleSheet.create({
     letterSpacing: -0.48,
   },
   image: {
-    flex: 2,
+    flex: 3,
     width: '100%',
-    height: 200,
+    height: '100%',
   },
   gradientOverlay: {
     position: 'absolute',
@@ -173,9 +173,9 @@ export default function Index() {
       
       <ImageBackground
         style = {styles.image}
-        source={{
-          uri: 'https://npr.brightspotcdn.com/dims4/default/96deb04/2147483647/strip/true/crop/2250x1500+0+0/resize/880x587!/quality/90/?url=http://npr-brightspot.s3.amazonaws.com/legacy/sites/kwmu/files/202002/020620_chess_board_pexels.jpeg'
-        }}>
+        source={
+          require('../assets/images/homescreenchessboard.jpg')
+        }>
         <LinearGradient
         colors={['#8A695A', 'rgba(0,0,0,0)']}
         style={styles.gradientOverlay}
