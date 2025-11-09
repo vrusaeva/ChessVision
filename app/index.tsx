@@ -1,6 +1,6 @@
 import * as Font from 'expo-font';
+import { LinearGradient } from 'expo-linear-gradient'; // Change this to react-native-linear-gradient in actual dev build...
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import LinearGradient from 'react-native-linear-gradient';
 
 const styles = StyleSheet.create({
   container: {
@@ -13,11 +13,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    width: '100%'
+    flexGrow: 1,
   },
   title: {
     fontSize: 20,
-    color: 'white',
+    color: '#CBB1A2',
     fontFamily: 'Koh Santepheap-Regular',
   },
   button1: {
