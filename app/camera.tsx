@@ -1,8 +1,10 @@
 import * as Font from 'expo-font';
+import React, { useRef } from 'react';
 import * as ReactCamera from 'react-native-vision-camera';
 //import { LinearGradient } from 'expo-linear-gradient'; // Change this to react-native-linear-gradient in actual dev build...
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { LinearGradient } from 'react-native-linear-gradient';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 const styles = StyleSheet.create({
   container: {
@@ -12,7 +14,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#8A695A"
   },
   header: {
-    flex: 1,
+    flex: 1.5,
     justifyContent: "center",
     alignItems: "center",
     width: '100%',
@@ -25,10 +27,28 @@ const styles = StyleSheet.create({
   camera: {
     width: '100%',
     height: '100%',
-    flex: 9
+    flex: 7
+  },
+  footer: {
+    flex: 3,
+    justifyContent: "center",
+    alignItems: "center",
+    width: '100%',
+  },
+  cameraButton: {
+    flex: 1,
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    backgroundColor: '#A86841'
   },
   buttonContainer: {
-    flexDirection: 'row',
+    flex: 1,
   },
   padButton: {
     flex: 2,
@@ -97,7 +117,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     height: '100%'
   },
-})
+});
 
 export default function Camera() {
   Font.useFonts({
@@ -106,8 +126,17 @@ export default function Camera() {
     'Lohit Bengali' : require('../assets/fonts/Lohit-Bengali.ttf')
   });
 
+  const cameraRef = useRef<ReactCamera.Camera>(null);
   const device = ReactCamera.useCameraDevice('back');
   const { hasPermission, requestPermission } = ReactCamera.useCameraPermission();
+
+  const takePhoto = async () => {
+    if (cameraRef.current) {
+      const photo = await cameraRef.current.takePhoto();
+      console.log(photo.path);
+      return photo.path;
+    }
+  }
 
   if (!hasPermission) {
     // Camera permissions are not granted yet.
@@ -139,7 +168,25 @@ export default function Camera() {
       <ReactCamera.Camera 
         style={styles.camera}
         device={device}
-        isActive={true}/>
+        isActive={true}
+        ref={cameraRef}
+        photo={true}/>
+        
+      <LinearGradient 
+        colors = {['#2e1d12', '#562d15']}
+        start={{x: 0, y: 0}} 
+        end={{x: 1, y: 0}}
+        style={styles.footer}>
+          <TouchableOpacity 
+          style={styles.cameraButton} 
+          onPress={() => takePhoto}>
+            <Entypo 
+              size={40} 
+              color='#F7975D' 
+              name='camera'
+            />
+          </TouchableOpacity>
+      </LinearGradient>
     </View>
 
   );
