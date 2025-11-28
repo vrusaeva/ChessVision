@@ -1,7 +1,6 @@
-import { CameraType, CameraView, useCameraPermissions } from 'expo-camera';
 import * as Font from 'expo-font';
+import * as ReactCamera from 'react-native-vision-camera';
 //import { LinearGradient } from 'expo-linear-gradient'; // Change this to react-native-linear-gradient in actual dev build...
-import { useState } from 'react';
 import { Button, StyleSheet, Text, View } from "react-native";
 import { LinearGradient } from 'react-native-linear-gradient';
 
@@ -13,7 +12,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#8A695A"
   },
   header: {
-    flexGrow: 1,
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     width: '100%',
@@ -24,7 +23,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Koh Santepheap-Bold',
   },
   camera: {
-    flex: 1
+    width: '100%',
+    height: '100%',
+    flex: 9
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -105,15 +106,10 @@ export default function Camera() {
     'Lohit Bengali' : require('../assets/fonts/Lohit-Bengali.ttf')
   });
 
-  const [facing, setFacing] = useState<CameraType>('back');
-  const [permission, requestPermission] = useCameraPermissions();
+  const device = ReactCamera.useCameraDevice('back');
+  const { hasPermission, requestPermission } = ReactCamera.useCameraPermission();
 
-  if (!permission) {
-    // Camera permissions are still loading.
-    return <View />;
-  }
-
-  if (!permission.granted) {
+  if (!hasPermission) {
     // Camera permissions are not granted yet.
     return (
       <View style={styles.container}>
@@ -121,6 +117,10 @@ export default function Camera() {
         <Button onPress={requestPermission} title="grant permission" />
       </View>
     );
+  }
+
+  if (device == null) {
+    return <View />;
   }
 
   return (
@@ -136,7 +136,10 @@ export default function Camera() {
             Align your board with the guidelines, then press the button to capture.
           </Text>
       </LinearGradient>
-      <CameraView style={styles.camera} facing={facing}/>
+      <ReactCamera.Camera 
+        style={styles.camera}
+        device={device}
+        isActive={true}/>
     </View>
 
   );
