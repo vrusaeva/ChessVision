@@ -120,6 +120,7 @@ const styles = StyleSheet.create({
 });
 
 export default function Camera() {
+  console.log("Opened");
   Font.useFonts({
     'Koh Santepheap-Bold': require('../assets/fonts/KohSantepheap-Bold.ttf'),
     'Koh Santepheap-Regular': require('../assets/fonts/KohSantepheap-Regular.ttf'),
@@ -131,7 +132,9 @@ export default function Camera() {
   const { hasPermission, requestPermission } = ReactCamera.useCameraPermission();
 
   const takePhoto = async () => {
+    console.log("Trying to take photo");
     if (cameraRef.current) {
+      console.log("cameraRef.current exists");
       const photo = await cameraRef.current.takePhoto();
       console.log(photo.path);
       return photo.path;
@@ -179,7 +182,7 @@ export default function Camera() {
         style={styles.footer}>
           <TouchableOpacity 
           style={styles.cameraButton} 
-          onPress={() => takePhoto}>
+          onPress={() => takePhoto()}>
             <Entypo 
               size={40} 
               color='#F7975D' 
