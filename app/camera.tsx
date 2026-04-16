@@ -51,10 +51,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flex: 1,
   },
-  padButton: {
-    flex: 2,
-  },
-  button1: {
+  button: {
     flexDirection: 'row',
     flex: 5,
     paddingTop: 20,
@@ -63,45 +60,46 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     rowGap: 10,
     columnGap: 10,
-    borderBottomLeftRadius: 6,
-    borderBottomRightRadius: 6,
-    borderTopLeftRadius: 6,
-    borderTopRightRadius: 6,
+    borderBottomLeftRadius: 40,
+    borderBottomRightRadius: 40,
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
     backgroundColor: 'rgba(195, 179, 171, 1)',
     shadowColor: 'rgba(0, 0, 0, 0.250980406999588)',
     shadowRadius: 4,
     shadowOffset: {"width":0,"height":4},
   },
-  button1_text: {
-    color: 'rgba(48, 30, 19, 1)',
+  light: {
+    backgroundColor: 'rgba(195, 179, 171, 1)',
+  },
+  dark: {
+    backgroundColor: 'rgba(48, 30, 19, 1)',
+  },
+  button_text: {
     fontFamily: 'Lohit Bengali',
     fontSize: 24,
     fontStyle: 'normal',
     fontWeight: '400',
     letterSpacing: -0.48,
   },
-  button2: {
-    flexDirection: 'row',
-    flex: 5,
-    paddingTop: 20,
-    paddingBottom: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    rowGap: 10,
-    columnGap: 10,
-    borderBottomLeftRadius: 6,
-    borderBottomRightRadius: 6,
-    borderTopLeftRadius: 6,
-    borderTopRightRadius: 6,
-    backgroundColor: 'rgba(48, 30, 19, 1)',
-    shadowColor: 'rgba(0, 0, 0, 0.250980406999588)',
-    shadowRadius: 4,
-    shadowOffset: {"width":0,"height":4},
+  light_text: {
+    color: 'rgba(195, 179, 171, 1)',
+  },
+  dark_text: {
+    color: 'rgba(48, 30, 19, 1)',
+  },
+  button2_text: {
+    color: 'rgba(195, 179, 171, 1)',
+    fontFamily: 'Lohit Bengali',
+    fontSize: 24,
+    fontStyle: 'normal',
+    fontWeight: '400',
+    letterSpacing: -0.48,
   },
   confirmation_text: {
     color: 'rgba(195, 179, 171, 1)',
     fontFamily: 'Lohit Bengali',
-    fontSize: 24,
+    fontSize: 15,
     fontStyle: 'normal',
     fontWeight: '400',
     letterSpacing: -0.48,
@@ -110,6 +108,7 @@ const styles = StyleSheet.create({
     flex: 3,
     width: '100%',
     height: '100%',
+    aspectRatio: 1
   },
   lowerRow: {
     flex: 3,
@@ -208,13 +207,15 @@ export default function Camera() {
           </TouchableOpacity>
           <View style={{flex: 0.3}}/>
           <View style={styles.lowerRow}>
-            <Image
-              source={{ uri: ( currentPath ? currentPath : "" ) }}
-              style={styles.image}
-            />
-            <View style={{flex: 3}}>
-              <Text> Captured successfully. </Text>
-              <Text> Saved to path ${currentPath}. </Text>
+            <View style={{flex: 3, paddingBottom: 20, paddingLeft: 20}}>
+              <Image
+                source={{ uri: ( currentPath ? currentPath : "" ) }}
+                style={styles.image}
+              />
+            </View>
+            <View style={{flex: 4, alignItems: 'center'}}>
+              <Text style={[styles.confirmation_text, styles.light_text]}> Captured successfully. </Text>
+              <Text style={[styles.confirmation_text, styles.light_text]}> Saved to path {currentPath}. </Text>
             </View>
           </View>
       </LinearGradient>
