@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#8A695A"
+    backgroundColor: "rgb(138, 105, 90)"
   },
   header: {
     flexGrow: 1,
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   title: {
-    fontSize: 20,
+    fontSize: 25,
     color: '#CBB1A2',
     fontFamily: 'Koh Santepheap-Bold',
   },
@@ -26,9 +26,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   padButton: {
-    flex: 2,
+    flex: 1.5,
   },
-  button1: {
+  button: {
     flexDirection: 'row',
     flex: 5,
     paddingTop: 20,
@@ -37,40 +37,33 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     rowGap: 10,
     columnGap: 10,
-    borderBottomLeftRadius: 6,
-    borderBottomRightRadius: 6,
-    borderTopLeftRadius: 6,
-    borderTopRightRadius: 6,
+    borderBottomLeftRadius: 40,
+    borderBottomRightRadius: 40,
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
     backgroundColor: 'rgba(195, 179, 171, 1)',
     shadowColor: 'rgba(0, 0, 0, 0.250980406999588)',
     shadowRadius: 4,
     shadowOffset: {"width":0,"height":4},
   },
-  button1_text: {
-    color: 'rgba(48, 30, 19, 1)',
+  light: {
+    backgroundColor: 'rgba(195, 179, 171, 1)',
+  },
+  dark: {
+    backgroundColor: 'rgba(48, 30, 19, 1)',
+  },
+  button_text: {
     fontFamily: 'Lohit Bengali',
     fontSize: 24,
     fontStyle: 'normal',
     fontWeight: '400',
     letterSpacing: -0.48,
   },
-  button2: {
-    flexDirection: 'row',
-    flex: 5,
-    paddingTop: 20,
-    paddingBottom: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    rowGap: 10,
-    columnGap: 10,
-    borderBottomLeftRadius: 6,
-    borderBottomRightRadius: 6,
-    borderTopLeftRadius: 6,
-    borderTopRightRadius: 6,
-    backgroundColor: 'rgba(48, 30, 19, 1)',
-    shadowColor: 'rgba(0, 0, 0, 0.250980406999588)',
-    shadowRadius: 4,
-    shadowOffset: {"width":0,"height":4},
+  light_text: {
+    color: 'rgba(195, 179, 171, 1)',
+  },
+  dark_text: {
+    color: 'rgba(48, 30, 19, 1)',
   },
   button2_text: {
     color: 'rgba(195, 179, 171, 1)',
@@ -125,11 +118,11 @@ export default function Home() {
           style={styles.buttonContainer}>
             <View style={styles.padButton}></View>
             <TouchableOpacity
-              style={styles.button1}
+              style={[styles.button, styles.light]}
               onPress={() => router.push('/camera')}>
               <Text 
-              style={styles.button1_text}>
-                Take Photo
+              style={[styles.button_text, styles.dark_text]}>
+                Capture Position
               </Text>
             </TouchableOpacity>
             <View style={styles.padButton}></View>
@@ -138,11 +131,11 @@ export default function Home() {
           style={styles.buttonContainer}>
             <View style={styles.padButton}></View>
             <TouchableOpacity
-              style={styles.button2}
+              style={[styles.button, styles.dark]}
               onPress={() => Alert.alert('Button with adjusted color pressed')}>
               <Text 
-              style={styles.button2_text}>
-                Run Game
+              style={[styles.button_text, styles.light_text]}>
+                Capture Game
               </Text>
             </TouchableOpacity>
             <View style={styles.padButton}></View>
@@ -151,11 +144,11 @@ export default function Home() {
           style={styles.buttonContainer}>
             <View style={styles.padButton}></View>
             <TouchableOpacity
-              style={styles.button1}
+              style={[styles.button, styles.light]}
               onPress={() => Alert.alert('Button with adjusted color pressed')}>
               <Text 
-              style={styles.button1_text}>
-                Run Game - Auto
+              style={[styles.button_text, styles.dark_text]}>
+                Capture Game - Auto
               </Text>
             </TouchableOpacity>
             <View style={styles.padButton}></View>
@@ -164,11 +157,24 @@ export default function Home() {
           style={styles.buttonContainer}>
             <View style={styles.padButton}></View>
             <TouchableOpacity
-              style={styles.button2}
+              style={[styles.button, styles.dark]}
               onPress={() => Alert.alert('Button with adjusted color pressed')}>
               <Text 
-              style={styles.button2_text}>
-                Past Games
+              style={[styles.button_text, styles.light_text]}>
+                Saved Positions
+              </Text>
+            </TouchableOpacity>
+            <View style={styles.padButton}></View>
+          </View>
+          <View
+          style={styles.buttonContainer}>
+            <View style={styles.padButton}></View>
+            <TouchableOpacity
+              style={[styles.button, styles.light]}
+              onPress={() => Alert.alert('Button with adjusted color pressed')}>
+              <Text 
+              style={[styles.button_text, styles.dark_text]}>
+                Saved Games
               </Text>
             </TouchableOpacity>
             <View style={styles.padButton}></View>
