@@ -1,8 +1,9 @@
+import { CameraRoll } from '@react-native-camera-roll/camera-roll';
 import * as Font from 'expo-font';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import * as ReactCamera from 'react-native-vision-camera';
 //import { LinearGradient } from 'expo-linear-gradient'; // Change this to react-native-linear-gradient in actual dev build...
-import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Button, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { LinearGradient } from 'react-native-linear-gradient';
 import Entypo from 'react-native-vector-icons/Entypo';
 
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     shadowOffset: {"width":0,"height":4},
   },
-  button2_text: {
+  confirmation_text: {
     color: 'rgba(195, 179, 171, 1)',
     fontFamily: 'Lohit Bengali',
     fontSize: 24,
@@ -109,6 +110,10 @@ const styles = StyleSheet.create({
     flex: 3,
     width: '100%',
     height: '100%',
+  },
+  lowerRow: {
+    flex: 3,
+    flexDirection: 'row'
   },
   gradientOverlay: {
     position: 'absolute',
@@ -130,6 +135,7 @@ export default function Camera() {
   const cameraRef = useRef<ReactCamera.Camera>(null);
   const device = ReactCamera.useCameraDevice('back');
   const { hasPermission, requestPermission } = ReactCamera.useCameraPermission();
+  const [currentPath, setCurrentPath] = useState<string | null>(null);
 
   const takePhoto = async () => {
     console.log("Trying to take photo");
@@ -137,9 +143,19 @@ export default function Camera() {
       console.log("cameraRef.current exists");
       const photo = await cameraRef.current.takePhoto();
       console.log(photo.path);
-      return photo.path;
+      const savedPath = await CameraRoll.save(`file://${photo.path}`, {
+        type: 'photo'
+      });
+      const imageUri =
+        savedPath.startsWith('file://') ||
+        savedPath.startsWith('content://') ||
+        savedPath.startsWith('ph://')
+          ? savedPath
+          : `file://${savedPath}`;
+      setCurrentPath(imageUri);
+      console.log(imageUri);
     }
-  }
+  };
 
   if (!hasPermission) {
     // Camera permissions are not granted yet.
@@ -180,15 +196,27 @@ export default function Camera() {
         start={{x: 0, y: 0}} 
         end={{x: 1, y: 0}}
         style={styles.footer}>
+          <View style={{flex: 0.1}}/>
           <TouchableOpacity 
           style={styles.cameraButton} 
-          onPress={() => takePhoto()}>
+          onPress={takePhoto}>
             <Entypo 
               size={40} 
               color='#F7975D' 
               name='camera'
             />
           </TouchableOpacity>
+          <View style={{flex: 0.3}}/>
+          <View style={styles.lowerRow}>
+            <Image
+              source={{ uri: ( currentPath ? currentPath : "" ) }}
+              style={styles.image}
+            />
+            <View style={{flex: 3}}>
+              <Text> Captured successfully. </Text>
+              <Text> Saved to path ${currentPath}. </Text>
+            </View>
+          </View>
       </LinearGradient>
     </View>
 
