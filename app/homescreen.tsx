@@ -56,13 +56,13 @@ const styles = StyleSheet.create({
   },
   light: {
     borderWidth: 2,
-    borderColor: 'rgba(195, 179, 171, 1)',
-    backgroundColor: 'rgba(195, 179, 171, 0.9)',
+    borderColor: 'rgb(212, 193, 183)',
+    backgroundColor: 'rgba(195, 179, 171, 1)',
   },
   dark: {
     borderWidth: 2,
-    borderColor: 'rgba(48, 30, 19, 1)',
-    backgroundColor: 'rgba(48, 30, 19, 0.9)',
+    borderColor: 'rgb(35, 21, 13)',
+    backgroundColor: 'rgba(48, 30, 19, 1)',
   },
   button_text: {
     fontFamily: 'Lohit Bengali',
